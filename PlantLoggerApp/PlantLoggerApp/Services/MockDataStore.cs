@@ -12,15 +12,19 @@ namespace PlantLoggerApp.Services
 
         public MockDataStore()
         {
+            
             plants = new List<Plant>()
             {
-                new Plant { PlantID = "1", Type = "First item", Temperature_warning=false  },
+/*
+                new Plant { PlantID = "1", Type = "First item", Temperature_warning=false , Temperature = 5, Air_humidity = 1, IsDry = false, ImageSource = "bubz1.jpg" }
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Second item", Temperature_warning=false },
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Third item", Temperature_warning= false },
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Fourth item", Temperature_warning=false },
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Fifth item", Temperature_warning= false },
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Sixth item", Temperature_warning= false}
+              */
             };
+             
         }
 
         public async Task<bool> AddItemAsync(Plant plant)

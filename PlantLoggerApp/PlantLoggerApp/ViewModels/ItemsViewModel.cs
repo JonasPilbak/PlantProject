@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PlantLoggerApp.ViewModels
@@ -12,6 +13,25 @@ namespace PlantLoggerApp.ViewModels
     {
         private Plant _selectedItem;
 
+
+        private ImageSource imageSource;
+        public ImageSource ImageSource
+        {
+            get { return imageSource; }
+            set
+            {
+                imageSource = value;
+                SetProperty(ref imageSource, value);
+            }
+        }
+
+       
+
+       
+
+
+        public Command TappedTest { get; }
+        public Command AddPicture { get; }
         public ObservableCollection<Plant> Plants { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
@@ -19,14 +39,27 @@ namespace PlantLoggerApp.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Browse";
+            
+            Title = "Show plants";
             Plants = new ObservableCollection<Plant>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Plant>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+            TappedTest = new Command(testMethod);
         }
+
+        public async void testMethod() 
+        {
+            
+            Console.WriteLine(Plants.GetType());
+
+        }
+
+
+       
+
 
         async Task ExecuteLoadItemsCommand()
         {
@@ -71,6 +104,8 @@ namespace PlantLoggerApp.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
+
+        
 
         async void OnItemSelected(Plant plant)
         {

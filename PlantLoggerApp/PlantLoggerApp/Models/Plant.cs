@@ -15,7 +15,22 @@ namespace PlantLoggerApp.Models
             set { name = value; OnPropertyChanged(); }
         }
 
+        public Color colorBackground;
 
+        public Color ColorBackground
+        {
+            get { return colorBackground; }
+            set { colorBackground = value; OnPropertyChanged(); }
+        }
+
+/*
+        public Warnings Humidity_warning
+        {
+            get { return humidity_warning; }
+            set { humidity_warning = value; OnPropertyChanged(); }
+        }
+
+        */
         public string type;
 
         public string Type
@@ -24,7 +39,7 @@ namespace PlantLoggerApp.Models
             set { type = value; OnPropertyChanged(); }
         }
 
-
+        
         public bool temperature_warning;
 
         public bool Temperature_warning
@@ -41,12 +56,12 @@ namespace PlantLoggerApp.Models
             set { humidity_warning = value; OnPropertyChanged(); }
         }
 
-        public Image picture;
+        public ImageSource imageSource;
 
-        public Image Picture
+        public ImageSource ImageSource
         {
-            get { return picture; }
-            set { picture = value; OnPropertyChanged(); }
+            get { return imageSource; }
+            set { imageSource = value; OnPropertyChanged(); }
         }
 
         public float temperature;
