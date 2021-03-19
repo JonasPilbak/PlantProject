@@ -85,13 +85,10 @@ namespace PlantLoggerApp.ViewModels
             {
                 
                 var plant = await DataStore.GetItemAsync(plantID);
-                PlantID = plant.PlantID;
+                //PlantID = plant.PlantID;
                 Type = plant.type;
                 Temperature_warning = plant.temperature_warning;
-                Temperature = plant.temperature;
-                ImageSource = plant.imageSource;
                 
-                IsDry = plant.isDry;
             }
             catch (Exception)
             {

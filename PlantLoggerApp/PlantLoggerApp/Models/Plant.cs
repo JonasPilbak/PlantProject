@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Xamarin.Forms;
 
@@ -7,8 +8,11 @@ namespace PlantLoggerApp.Models
 {
     public class Plant : BindableObject
     {
-        public string name;
+        public static Plant plant = new Plant();
 
+
+        public string name;
+       
         public string Name
         {
             get { return name; }
@@ -55,6 +59,21 @@ namespace PlantLoggerApp.Models
             get { return humidity_warning; }
             set { humidity_warning = value; OnPropertyChanged(); }
         }
+
+        private byte[] picture;
+
+        
+
+        public byte[] Picture
+        {
+            get => picture;
+            set { 
+                picture = value;
+                ImageSource = ImageSource.FromStream(() => new MemoryStream(picture));
+            
+            }
+        }
+
 
         public ImageSource imageSource;
 

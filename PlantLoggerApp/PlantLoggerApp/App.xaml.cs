@@ -1,4 +1,5 @@
-﻿using PlantLoggerApp.Services;
+﻿using PlantLoggerApp.Models;
+using PlantLoggerApp.Services;
 using PlantLoggerApp.Views;
 using System;
 using Xamarin.Forms;
@@ -8,7 +9,7 @@ namespace PlantLoggerApp
 {
     public partial class App : Application
     {
-
+        public static Plant plant = new Plant();
         public App()
         {
             InitializeComponent();

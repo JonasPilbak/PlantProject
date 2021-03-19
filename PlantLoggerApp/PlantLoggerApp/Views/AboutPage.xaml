@@ -19,8 +19,13 @@
 
     <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
                         <Button Text="Take picture" Command="{Binding AddPicture} " ></Button>
-                        <Image Source="{Binding ImageSource}"></Image>
-        <Image x:Name="test"/>
+        <Image Source="{Binding ThePlants.ImageSource}"></Image>
+                                             
+                                             
+        
+        
+        
+        
         <Button Text="Find a picture" Command="{Binding FindPhoto}"></Button>
         <Label Text="{Binding Name}"></Label>
         

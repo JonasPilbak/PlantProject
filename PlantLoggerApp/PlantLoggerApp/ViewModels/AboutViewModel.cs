@@ -10,17 +10,17 @@ namespace PlantLoggerApp.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {
-        public ImageSource imageSource;
-        public ImageSource ImageSource
+        
+       
+        private Plant thePlants = null;
+        
+        public Plant ThePlants
         {
-            get { return imageSource; }
-            set
-            {
-                imageSource = value;
-                SetProperty(ref imageSource, value);
-            }
+            get { return thePlants; }
+            set { thePlants = value; OnPropertyChanged(); }
         }
 
+        
         private string name;
 
         public string Name
@@ -41,7 +41,7 @@ namespace PlantLoggerApp.ViewModels
         {
             Plants = new ObservableCollection<Plant>();
             Title = "Main Page";
-
+            ThePlants = new Plant();
 
             AddPicture = new Command(takePicture);
             FindPhoto = new Command(pickPhoto);
@@ -51,7 +51,8 @@ namespace PlantLoggerApp.ViewModels
 
         private async void pickPhoto()
         {
-
+            Plant testPlant = new Plant();
+            Console.WriteLine("This is the pick photo");
          
 
             var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
@@ -62,9 +63,10 @@ namespace PlantLoggerApp.ViewModels
             });
             var stream = await result.OpenReadAsync();
 
-            ImageSource = ImageSource.FromStream(() => stream);
-            
-                
+            testPlant.ImageSource = ImageSource.FromStream(() => stream);
+
+            ThePlants = testPlant;
+            Console.WriteLine(thePlants.ToString() + "This is the console");
         }
 
 
@@ -72,25 +74,29 @@ namespace PlantLoggerApp.ViewModels
 
         private async void takePicture()
         {
+            Plant testPlant = new Plant();
+            Console.WriteLine("This is the take photo");
 
 
-           
+            FileResult result = await MediaPicker.CapturePhotoAsync();
 
-            var result = await MediaPicker.CapturePhotoAsync();
 
-           
 
-            var stream = await result.OpenReadAsync();
+            Stream stream = await result.OpenReadAsync();
 
-           
 
-            ImageSource = ImageSource.FromStream(() => stream);
 
-           
-            
-            
-            
+            testPlant.ImageSource = ImageSource.FromStream(() => stream);
+            ThePlants = testPlant;
+            Console.WriteLine(testPlant.ToString() + "This is the console");
+            //Plants.Add(thePlants);
+
+
+
+
+
         }
 
+       
     }
 }

@@ -5,9 +5,9 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
+        <Label Text="Type of plant:" FontSize="Medium" />
         <Label Text="{Binding Type}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
+        <Label Text="Is there a warning:" FontSize="Medium" />
         <Label Text="{Binding Temperature_warning}" FontSize="Small"/>
     </StackLayout>
     

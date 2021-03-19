@@ -14,16 +14,7 @@ namespace PlantLoggerApp.ViewModels
         private Plant _selectedItem;
 
 
-        private ImageSource imageSource;
-        public ImageSource ImageSource
-        {
-            get { return imageSource; }
-            set
-            {
-                imageSource = value;
-                SetProperty(ref imageSource, value);
-            }
-        }
+      
 
        
 
@@ -43,7 +34,8 @@ namespace PlantLoggerApp.ViewModels
             Title = "Show plants";
             Plants = new ObservableCollection<Plant>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
+            
+            
             ItemTapped = new Command<Plant>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
