@@ -44,12 +44,12 @@ namespace PlantLoggerApp.Models
         }
 
         
-        public bool temperature_warning;
+        public string tempWarning;
 
-        public bool Temperature_warning
+        public string TempWarning
         {
-            get { return temperature_warning; }
-            set { temperature_warning = value; OnPropertyChanged(); }
+            get { return tempWarning; }
+            set { tempWarning = value; OnPropertyChanged(); }
         }
 
         public bool humidity_warning;
@@ -83,33 +83,41 @@ namespace PlantLoggerApp.Models
             set { imageSource = value; OnPropertyChanged(); }
         }
 
-        public float temperature;
+        public string temperature;
 
-        public float Temperature
+        public string Temperature
         {
             get { return temperature; }
             set { temperature = value; OnPropertyChanged(); }
         }
 
-        public bool isDry;
+        public string plantHumidity;
 
-        public bool IsDry
+        public string PlantHumidity
         {
-            get { return isDry; }
-            set { isDry = value; OnPropertyChanged(); }
+            get { return plantHumidity; }
+            set { plantHumidity = value; OnPropertyChanged(); }
         }
 
-        public DateTime time;
+        public string drySoil;
 
-        public DateTime Time
+        public string DrySoil
+        {
+            get { return drySoil; }
+            set { drySoil = value; OnPropertyChanged(); }
+        }
+
+        public string time;
+
+        public string Time
         {
             get { return time; }
             set { time = value; OnPropertyChanged(); }
         }
 
-        public float air_humidity;
+        public string air_humidity;
 
-        public float Air_humidity
+        public string Air_humidity
         {
             get { return air_humidity; }
             set { air_humidity = value; OnPropertyChanged(); }
@@ -123,7 +131,24 @@ namespace PlantLoggerApp.Models
             set { plantID = value; OnPropertyChanged(); }
         }
 
-
-
+       public Plant() 
+        {
+        
+        
+        }
+        public Plant(string name) 
+        {
+            this.Name = name;
+        
+        }
+        public Plant(string name,string plantID, string plantHumidity , string tempWarning , string drySoil ) 
+        {
+            this.Name = name;
+            this.PlantID = plantID;
+            this.PlantHumidity = plantHumidity;
+            this.TempWarning = tempWarning;
+            this.DrySoil = drySoil;
+       
+        }
     }
 }

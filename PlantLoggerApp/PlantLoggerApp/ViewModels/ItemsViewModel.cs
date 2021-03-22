@@ -1,8 +1,11 @@
-﻿using PlantLoggerApp.Models;
+﻿using Newtonsoft.Json;
+using PlantLoggerApp.Models;
 using PlantLoggerApp.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -39,7 +42,7 @@ namespace PlantLoggerApp.ViewModels
             ItemTapped = new Command<Plant>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-            TappedTest = new Command(testMethod);
+            TappedTest = new Command(testGet);
         }
 
         public async void testMethod() 
@@ -55,12 +58,26 @@ namespace PlantLoggerApp.ViewModels
 
         async Task ExecuteLoadItemsCommand()
         {
+
             IsBusy = true;
 
             try
             {
+
+
                 Plants.Clear();
                 var plants = await DataStore.GetItemsAsync(true);
+                /*
+                var clientget = new HttpClient();
+                var uri2 = "https://httpbin.org/get";
+
+                var response2 = await clientget.GetAsync(uri2);
+
+                string content = await response2.Content.ReadAsStringAsync();
+                Console.WriteLine(content);
+                plants = JsonConvert.DeserializeObject<List<Plant>>(content);
+
+                */
                 foreach (var plant in plants)
                 {
                     Plants.Add(plant);
@@ -76,6 +93,44 @@ namespace PlantLoggerApp.ViewModels
             }
         }
 
+
+
+        public async void testGet() 
+        {
+            Plants.Clear();
+
+           // var plants = await DataStore.GetItemsAsync(true);
+            var clientget = new HttpClient();
+            var uri2 = "http://192.168.87.171:3000/plants";
+            try
+            {
+
+            var response2 = await clientget.GetAsync(uri2);
+
+                if (response2.IsSuccessStatusCode)
+                {
+
+            string content = await response2.Content.ReadAsStringAsync();
+            Console.WriteLine(content);
+                    List<Plant> plantie = JsonConvert.DeserializeObject<List<Plant>>(content);
+
+                    foreach (var item in plantie)
+            {
+                Plant planget = new Plant(item.Name, item.PlantID, item.plantHumidity,item.tempWarning, item.drySoil);
+                Plants.Add(planget);
+            }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                Debug.WriteLine("Error");
+            }
+
+
+
+        }
         public void OnAppearing()
         {
             IsBusy = true;

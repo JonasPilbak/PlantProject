@@ -13,12 +13,12 @@ namespace PlantLoggerApp.ViewModels
 
         private string plantID;
         private float temperature;
-        private bool isDry;
+        private string isDry;
         private DateTime time;
         private string type;
         private float air_humidity;
         private ImageSource imageSource;
-        private bool temperature_warning;
+        private string tempWarning;
         // public string Id { get; set; }
 
         public ImageSource ImageSource
@@ -42,7 +42,7 @@ namespace PlantLoggerApp.ViewModels
 
 
 
-        public bool IsDry
+        public string IsDry
         {
             
             get => isDry;
@@ -60,10 +60,10 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref type, value);
         }
 
-        public bool Temperature_warning
+        public string TempWarning
         {
-            get => temperature_warning;
-            set => SetProperty(ref temperature_warning, value);
+            get => tempWarning;
+            set => SetProperty(ref tempWarning, value);
         }
 
         public string PlantID
@@ -87,7 +87,7 @@ namespace PlantLoggerApp.ViewModels
                 var plant = await DataStore.GetItemAsync(plantID);
                 //PlantID = plant.PlantID;
                 Type = plant.type;
-                Temperature_warning = plant.temperature_warning;
+                TempWarning = plant.tempWarning;
                 
             }
             catch (Exception)

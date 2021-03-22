@@ -1,6 +1,7 @@
 ﻿using PlantLoggerApp.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -51,6 +52,8 @@ namespace PlantLoggerApp.ViewModels
 
         private async void pickPhoto()
         {
+
+            
             Plant testPlant = new Plant();
             Console.WriteLine("This is the pick photo");
          
@@ -66,7 +69,16 @@ namespace PlantLoggerApp.ViewModels
             testPlant.ImageSource = ImageSource.FromStream(() => stream);
 
             ThePlants = testPlant;
+
+            
             Console.WriteLine(thePlants.ToString() + "This is the console");
+
+        
+
+           
+            
+
+
         }
 
 

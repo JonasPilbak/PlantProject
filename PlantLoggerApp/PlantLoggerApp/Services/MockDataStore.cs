@@ -22,7 +22,7 @@ namespace PlantLoggerApp.Services
             plants = new List<Plant>()
             {
 
-                new Plant { PlantID = "1", Type = "First item", Temperature_warning=false , Temperature = 5, Air_humidity = 1, IsDry = false }
+               // new Plant { PlantID = "1", Type = "First item", Temperature_warning=false , Temperature = 5, Air_humidity = 1, IsDry = false }
               /*
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Second item", Temperature_warning=false },
                 new Plant { PlantID = Guid.NewGuid().ToString(), Type = "Third item", Temperature_warning= false },

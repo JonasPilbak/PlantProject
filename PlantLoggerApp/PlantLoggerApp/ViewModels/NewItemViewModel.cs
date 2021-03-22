@@ -13,7 +13,7 @@ namespace PlantLoggerApp.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-        readonly List<Plant> plants;
+       
       
         private Plant thePlants = null;
 
@@ -23,16 +23,16 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref thePlants, value);
         }
 
-
-
+        private string plantHumidity;
+        private string name;
         private string plantID;
-        private float temperature;
-        private bool isDry;
+        private string temperature;
+        private string drySoil;
         private DateTime time;
         private string type;
-        private float air_humidity;
+        private string air_humidity;
         //private ImageSource imageSource;
-        private bool temperature_warning;
+        private string tempWarning;
         private Color colorBackground;
         //public Color ColorBackground { get; set; } = Color.FromHex("#E40000");
 /*
@@ -125,7 +125,16 @@ namespace PlantLoggerApp.ViewModels
         //Console.WriteLine(thePlants.ToString() + "This is the console");
         }
 
-
+        public string Name
+        {
+            get => name;
+            set => SetProperty(ref name, value);
+        }
+        public string PlantHumidity
+        {
+            get => plantHumidity;
+            set => SetProperty(ref plantHumidity, value);
+        }
 
 
         public string PlantID
@@ -134,19 +143,19 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref plantID, value);
         }
 
-        public float Temperature
+        public string Temperature
         {
             get => temperature;
             set => SetProperty(ref temperature, value);
         }
 
-        public bool IsDry
+        public string DrySoil
         {
-            get => isDry;
-            set => SetProperty(ref isDry, value);
+            get => drySoil;
+            set => SetProperty(ref drySoil, value);
         }
 
-        public float Air_humidity
+        public string Air_humidity
         {
             get => air_humidity;
             set => SetProperty(ref air_humidity, value);
@@ -158,10 +167,10 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref type, value);
         }
 
-        public bool Temperature_warning
+        public string TempWarning
         {
-            get => temperature_warning;
-            set => SetProperty(ref temperature_warning, value);
+            get => tempWarning;
+            set => SetProperty(ref tempWarning, value);
         }
 
         public Command SaveCommand { get; }
@@ -197,34 +206,51 @@ namespace PlantLoggerApp.ViewModels
         {
             Plant newPlant = new Plant()
             {
-                PlantID = Guid.NewGuid().ToString(),
-                Type = Type,
-                Temperature_warning = Temperature_warning,
-                IsDry = IsDry,
-                Air_humidity = Air_humidity,
-                Temperature = Temperature,
-                ImageSource = ThePlants.ImageSource,
+                name = Name,
+                plantID = PlantID,
+                plantHumidity = PlantHumidity,
+                tempWarning = TempWarning,
+                drySoil = DrySoil,
+               // Air_humidity = Air_humidity,
+               // Temperature = Temperature,
+                //ImageSource = ThePlants.ImageSource,
                 
 
 
             };
 
-           
-           
+            
 
-            await DataStore.AddItemAsync(newPlant);
+           
 
             /*
+            var clientget = new HttpClient();
+            var uri = "https://httpbin.org/get";
+
+            var response2 = await clientget.GetAsync(uri2);
+
+            string content = await response2.Content.ReadAsStringAsync();
+            Console.WriteLine(content);
+            List<Plant> plantie = JsonConvert.DeserializeObject<List<Plant>>(content);
+
+            foreach (var item in plantie)
+            {
+                Plant planget = new Plant(item.PlantID, item.Temperature, item.Air_humidity, item.Soil_humidity, item.Time);
+            }
+            */
+            
+                await DataStore.AddItemAsync(newPlant);
+            
             var json = JsonConvert.SerializeObject(newPlant);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = "https://httpbin.org/post";
+            var url = "http://192.168.87.171:3000/plants";
             var client = new HttpClient();
             var response = await client.PostAsync(url, data);
 
             string result = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(result);
-            */
+            
             
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

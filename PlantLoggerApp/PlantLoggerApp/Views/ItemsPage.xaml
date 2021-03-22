@@ -9,43 +9,47 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Get" Command="{Binding TappedTest}"/>
+        <ToolbarItem Text="Delete"></ToolbarItem>
     </ContentPage.ToolbarItems>
     <!--
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     
-    <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                        
+    <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding TappedTest}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Plants}"
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Plant" Spacing="4">
-                        
                         <Label Text="Plant ID" x:Name="testlabel"></Label>
-                        <Label Text="{Binding PlantID}" 
+                        <Label Text="{Binding PlantID}"
+                               
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
+                        <Label Text="{Binding Name}"></Label>
                         <Image Source="{Binding ImageSource}"></Image>
                         <Label Text="Plant type"></Label>
-                        <Label Text="{Binding Type}" 
+                        <Label Text="{Binding PlantHumidity}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
                         <Label Text="Current temperature"></Label>
-                        <Label Text="{Binding Temperature}" 
+                        <Label Text="{Binding TempWarning}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
                         <Label Text="Plant dry or not"></Label>
-                        <Label Text="{Binding IsDry}" 
+                        <Label Text="{Binding DrySoil}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
                         <Label Text="Is the temperature to high"></Label>
-                        <Label Text="{Binding Temperature_warning}" 
+                        <Label Text="{Binding TempWarning}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
