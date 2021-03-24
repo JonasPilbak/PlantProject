@@ -1,4 +1,5 @@
 ﻿using PlantLoggerApp.Models;
+using Plugin.LocalNotification;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -33,7 +34,7 @@ namespace PlantLoggerApp.ViewModels
 
 
 
-
+        public Command MakeNotification { get; }
         public Command AddPicture { get; }
         public Command FindPhoto { get; }
         public ObservableCollection<Plant> Plants { get; }
@@ -43,13 +44,21 @@ namespace PlantLoggerApp.ViewModels
             Plants = new ObservableCollection<Plant>();
             Title = "Main Page";
             ThePlants = new Plant();
-
+            MakeNotification = new Command(appNotification);
             AddPicture = new Command(takePicture);
             FindPhoto = new Command(pickPhoto);
+
+
+
             
         }
 
+        private async void appNotification() 
+        {
 
+           // CrossLocalNotifications.Current.Show("This is a test", "Ok");
+        
+        }
         private async void pickPhoto()
         {
 

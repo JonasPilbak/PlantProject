@@ -91,12 +91,12 @@ namespace PlantLoggerApp.Models
             set { temperature = value; OnPropertyChanged(); }
         }
 
-        public string plantHumidity;
+        public string airHumidity;
 
-        public string PlantHumidity
+        public string AirHumidity
         {
-            get { return plantHumidity; }
-            set { plantHumidity = value; OnPropertyChanged(); }
+            get { return airHumidity; }
+            set { airHumidity = value; OnPropertyChanged(); }
         }
 
         public string drySoil;
@@ -114,14 +114,23 @@ namespace PlantLoggerApp.Models
             get { return time; }
             set { time = value; OnPropertyChanged(); }
         }
+        /*
+                public string air_humidity;
 
-        public string air_humidity;
+                public string Air_humidity
+                {
+                    get { return air_humidity; }
+                    set { air_humidity = value; OnPropertyChanged(); }
+                }
+        */
+        public string measureId;
 
-        public string Air_humidity
+        public string MeasureId
         {
-            get { return air_humidity; }
-            set { air_humidity = value; OnPropertyChanged(); }
+            get { return measureId; }
+            set { measureId = value; }
         }
+
 
         public string plantID;
 
@@ -131,7 +140,16 @@ namespace PlantLoggerApp.Models
             set { plantID = value; OnPropertyChanged(); }
         }
 
-       public Plant() 
+        public string dateTime;
+
+        public string DateTime
+        {
+            get { return dateTime; }
+            set { dateTime = value; }
+        }
+
+
+        public Plant() 
         {
         
         
@@ -141,13 +159,15 @@ namespace PlantLoggerApp.Models
             this.Name = name;
         
         }
-        public Plant(string name,string plantID, string plantHumidity , string tempWarning , string drySoil ) 
+        public Plant(string plantID,  string airHumidity, string tempWarning, string drySoil ,string dateTime ) 
         {
-            this.Name = name;
+            
             this.PlantID = plantID;
-            this.PlantHumidity = plantHumidity;
+          
+            this.AirHumidity = airHumidity;
             this.TempWarning = tempWarning;
             this.DrySoil = drySoil;
+            this.DateTime = dateTime;
        
         }
     }

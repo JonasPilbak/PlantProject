@@ -26,34 +26,28 @@
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Plant" Spacing="4">
                         <Label Text="Plant ID" x:Name="testlabel"></Label>
-                        <Label Text="{Binding PlantID}"
-                               
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-                        <Label Text="{Binding Name}"></Label>
+                        <Label Text="{Binding PlantID}"/>
                         <Image Source="{Binding ImageSource}"></Image>
-                        <Label Text="Plant type"></Label>
-                        <Label Text="{Binding PlantHumidity}" 
+                        <Label Text="Current air humidity"></Label>
+                        <Label Text="{Binding AirHumidity}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                        <Label Text="Current temperature"></Label>
-                        <Label Text="{Binding TempWarning}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
-                        <Label Text="Plant dry or not"></Label>
+                        
+                        <Label Text="Plant's dryness in percentage"></Label>
                         <Label Text="{Binding DrySoil}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                        <Label Text="Is the temperature to high"></Label>
+                        
+                        <Label Text="Temperature warning"></Label>
                         <Label Text="{Binding TempWarning}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                     
+
+                        <Label Text="Current time"></Label>
+                        <Label Text="{Binding DateTime}"></Label>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

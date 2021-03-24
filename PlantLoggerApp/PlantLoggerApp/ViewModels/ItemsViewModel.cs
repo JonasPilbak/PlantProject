@@ -101,7 +101,7 @@ namespace PlantLoggerApp.ViewModels
 
            // var plants = await DataStore.GetItemsAsync(true);
             var clientget = new HttpClient();
-            var uri2 = "http://192.168.87.171:3000/plants";
+            var uri2 = "http://192.168.87.171:3000/measurements";
             try
             {
 
@@ -116,7 +116,8 @@ namespace PlantLoggerApp.ViewModels
 
                     foreach (var item in plantie)
             {
-                Plant planget = new Plant(item.Name, item.PlantID, item.plantHumidity,item.tempWarning, item.drySoil);
+
+                Plant planget = new Plant( item.plantID, item.airHumidity,item.tempWarning, item.drySoil, item.dateTime);
                 Plants.Add(planget);
             }
 
@@ -128,9 +129,13 @@ namespace PlantLoggerApp.ViewModels
                 Debug.WriteLine("Error");
             }
 
-
-
         }
+
+            public async void editList() 
+            {
+            
+            
+            }
         public void OnAppearing()
         {
             IsBusy = true;
