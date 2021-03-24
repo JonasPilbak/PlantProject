@@ -35,7 +35,7 @@ namespace PlantLoggerApp.ViewModels
         private string type;
         private byte[] pictures;
         private string air_humidity;
-        //private ImageSource imageSource;
+        private ImageSource ImageSource;
         private string tempWarning;
         private Color colorBackground;
         //public Color ColorBackground { get; set; } = Color.FromHex("#E40000");
@@ -97,10 +97,10 @@ namespace PlantLoggerApp.ViewModels
             {
 
             }
-
-
+           
 
             /*
+            
             var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
 
             {
@@ -113,10 +113,11 @@ namespace PlantLoggerApp.ViewModels
            // using (var memorystreamhandler = new MemoryStream()) {
                 
             ThePlants = testPlant;
-            */
+            
             //   ThePlants.ImageSource = memorystreamhandler.ToArray();
             // Console.WriteLine(thePlants.ToString() + "This is the console");
             //  }
+            */
         }
 
 

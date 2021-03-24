@@ -1,14 +1,19 @@
 ﻿using Newtonsoft.Json;
 using PlantLoggerApp.Models;
 using PlantLoggerApp.Views;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace PlantLoggerApp.ViewModels
 {
@@ -17,17 +22,18 @@ namespace PlantLoggerApp.ViewModels
         private Plant _selectedItem;
 
 
-      
+        public ImageSource imageResult { get; set; }
 
-       
 
-       
+
+
 
 
         public Command TappedTest { get; }
         public Command AddPicture { get; }
         public ObservableCollection<Plant> Plants { get; }
         public Command LoadItemsCommand { get; }
+        public Command PickPicture { get; }
         public Command AddItemCommand { get; }
         public Command<Plant> ItemTapped { get; }
 
@@ -36,19 +42,22 @@ namespace PlantLoggerApp.ViewModels
             
             Title = "Show plants";
             Plants = new ObservableCollection<Plant>();
+            
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            
-            
+            PickPicture = new Command(findaPicture);
+
             ItemTapped = new Command<Plant>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
             TappedTest = new Command(testGet);
+            
+            
         }
 
-        public async void testMethod() 
+        public async void makePdf() 
         {
-            
-            Console.WriteLine(Plants.GetType());
+
+           
 
         }
 
@@ -67,17 +76,7 @@ namespace PlantLoggerApp.ViewModels
 
                 Plants.Clear();
                 var plants = await DataStore.GetItemsAsync(true);
-                /*
-                var clientget = new HttpClient();
-                var uri2 = "https://httpbin.org/get";
-
-                var response2 = await clientget.GetAsync(uri2);
-
-                string content = await response2.Content.ReadAsStringAsync();
-                Console.WriteLine(content);
-                plants = JsonConvert.DeserializeObject<List<Plant>>(content);
-
-                */
+               
                 foreach (var plant in plants)
                 {
                     Plants.Add(plant);
@@ -92,7 +91,23 @@ namespace PlantLoggerApp.ViewModels
                 IsBusy = false;
             }
         }
+        public async void findaPicture()
+        {
+            var pickResult = await FilePicker.PickAsync(new PickOptions
+            {
+                FileTypes = FilePickerFileType.Images,
+                
+                PickerTitle = "Pick an image"
+            });
 
+            if (pickResult != null)
+            {
+                var stream = await pickResult.OpenReadAsync();
+                imageResult = ImageSource.FromStream(() => stream);
+            }
+
+
+        }
 
 
         public async void testGet() 
@@ -113,13 +128,20 @@ namespace PlantLoggerApp.ViewModels
             string content = await response2.Content.ReadAsStringAsync();
             Console.WriteLine(content);
                     List<Plant> plantie = JsonConvert.DeserializeObject<List<Plant>>(content);
-
+                    
                     foreach (var item in plantie)
             {
+                        
+                Plant planget = new Plant( item.plantID, item.temperature, item.airHumidity,item.tempWarning, item.drySoil, item.dateTime, item.picture);
+                       
 
-                Plant planget = new Plant( item.plantID, item.airHumidity,item.tempWarning, item.drySoil, item.dateTime);
                 Plants.Add(planget);
+                    
+
+
             }
+                    
+                  
 
                 }
             }

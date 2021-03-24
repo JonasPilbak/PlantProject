@@ -12,7 +12,7 @@ namespace PlantLoggerApp.Models
 
 
         public string name;
-       
+
         public string Name
         {
             get { return name; }
@@ -27,14 +27,14 @@ namespace PlantLoggerApp.Models
             set { colorBackground = value; OnPropertyChanged(); }
         }
 
-/*
-        public Warnings Humidity_warning
-        {
-            get { return humidity_warning; }
-            set { humidity_warning = value; OnPropertyChanged(); }
-        }
+        /*
+                public Warnings Humidity_warning
+                {
+                    get { return humidity_warning; }
+                    set { humidity_warning = value; OnPropertyChanged(); }
+                }
 
-        */
+                */
         public string type;
 
         public string Type
@@ -43,7 +43,7 @@ namespace PlantLoggerApp.Models
             set { type = value; OnPropertyChanged(); }
         }
 
-        
+
         public string tempWarning;
 
         public string TempWarning
@@ -60,25 +60,26 @@ namespace PlantLoggerApp.Models
             set { humidity_warning = value; OnPropertyChanged(); }
         }
 
-        private byte[] picture;
+        public byte[] picture;
 
-        
+
 
         public byte[] Picture
         {
             get => picture;
-            set { 
+            set {
                 picture = value;
                 ImageSource = ImageSource.FromStream(() => new MemoryStream(picture));
-            
+
             }
         }
 
 
-        public ImageSource imageSource;
+        public ImageSource imageSource = "bubz1.jpg";
 
         public ImageSource ImageSource
         {
+
             get { return imageSource; }
             set { imageSource = value; OnPropertyChanged(); }
         }
@@ -149,25 +150,26 @@ namespace PlantLoggerApp.Models
         }
 
 
-        public Plant() 
+        public Plant()
         {
-        
-        
+
+
         }
-        public Plant(string name) 
+        public Plant(string name)
         {
             this.Name = name;
-        
+
         }
-        public Plant(string plantID,  string airHumidity, string tempWarning, string drySoil ,string dateTime ) 
+        public Plant(string plantID, string temperature, string airHumidity, string tempWarning, string drySoil, string dateTime, byte[] picture ) 
         {
             
             this.PlantID = plantID;
-          
+            this.Temperature = temperature;
             this.AirHumidity = airHumidity;
             this.TempWarning = tempWarning;
             this.DrySoil = drySoil;
             this.DateTime = dateTime;
+            this.Picture = picture;
        
         }
     }

@@ -10,7 +10,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
         <ToolbarItem Text="Get" Command="{Binding TappedTest}"/>
-        <ToolbarItem Text="Delete"></ToolbarItem>
+        <ToolbarItem Text="Pick Image" Command="{Binding PickPicture}"></ToolbarItem>
     </ContentPage.ToolbarItems>
     <!--
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
@@ -27,7 +27,10 @@
                     <StackLayout Padding="10" x:DataType="model:Plant" Spacing="4">
                         <Label Text="Plant ID" x:Name="testlabel"></Label>
                         <Label Text="{Binding PlantID}"/>
+                       
                         <Image Source="{Binding ImageSource}"></Image>
+                        <Label Text="Current temperature"></Label>
+                        <Label Text="{Binding Temperature}"></Label>
                         <Label Text="Current air humidity"></Label>
                         <Label Text="{Binding AirHumidity}" 
                             LineBreakMode="NoWrap"
@@ -40,7 +43,7 @@
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
                         
-                        <Label Text="Temperature warning"></Label>
+                        <Label Text="Temperature to high"></Label>
                         <Label Text="{Binding TempWarning}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"

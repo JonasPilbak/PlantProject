@@ -5,10 +5,8 @@
              xmlns:vm="clr-namespace:PlantLoggerApp.ViewModels"
              xmlns:model="clr-namespace:PlantLoggerApp.Models"
              xmlns:local="clr-namespace"
-             xmlns:sys="clr-namespace:System.ComponentModel.Design;assembly=netstandard"
+             xmlns:sys="clr-namespace:System.ComponentModel.Design;assembly=netstandard" x:DataType="vm:AboutViewModel"
              Title="{Binding Title}" >
-   
-    
 
 
 
@@ -17,11 +15,11 @@
 
 
 
-    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+
+
+    <StackLayout x:Name="ClockLayout" Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
                         <Button Text="Take picture" Command="{Binding AddPicture} " ></Button>
-        <Image Source="{Binding ThePlants.ImageSource}"></Image>
-        <Button Text="Make notification" Command="{Binding MakeNotification}"></Button>
-                                             
+        <Image Source="{Binding ThePlants.ImageSource}"></Image>        
                                              
         
         

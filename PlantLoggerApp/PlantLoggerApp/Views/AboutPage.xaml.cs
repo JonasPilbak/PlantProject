@@ -16,6 +16,7 @@ namespace PlantLoggerApp.Views
         {
             InitializeComponent();
             BindingContext = new AboutViewModel();
+            
         }
 
 
