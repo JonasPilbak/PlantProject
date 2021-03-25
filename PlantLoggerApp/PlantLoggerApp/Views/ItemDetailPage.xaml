@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PlantLoggerApp.Views.ItemDetailPage"
-             Title="{Binding Title}">
+              xmlns:viewModel="clr-namespace:PlantLoggerApp.ViewModels;assembly=PlantLoggerApp"
+             >
 
+    
     <StackLayout Spacing="20" Padding="15">
         <Label Text="PlantID:" FontSize="Medium" />
         <Label Text="{Binding PlantID}" FontSize="Small"/>
         <Label Text="Current humidity"></Label>
-        <Label Text="{Binding PlantHumidity}"></Label>
+        <Label Text="{Binding AirHumidity}"></Label>
+        <Label Text="{Binding Temperature}"></Label>
         <Label Text="Is there a warning:" FontSize="Medium" />
         <Label Text="{Binding TempWarning}" FontSize="Small"/>
     </StackLayout>

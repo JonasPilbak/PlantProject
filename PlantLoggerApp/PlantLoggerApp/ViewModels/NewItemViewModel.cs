@@ -31,14 +31,14 @@ namespace PlantLoggerApp.ViewModels
         private string plantID;
         private string temperature;
         private string drySoil;
-        private DateTime time;
         private string type;
-        private byte[] pictures;
-        private string air_humidity;
-        private ImageSource ImageSource;
+       // private string type;
+       // private byte[] pictures;
+      //  private string air_humidity;
+       // private ImageSource ImageSource;
         private string tempWarning;
-        private Color colorBackground;
-        //public Color ColorBackground { get; set; } = Color.FromHex("#E40000");
+        public string dateTime;
+      
 /*
         public ImageSource ImageSource
         {
@@ -47,12 +47,6 @@ namespace PlantLoggerApp.ViewModels
         }
 
         */
-        public Color ColorBackground
-        {
-            get => colorBackground;
-            set => SetProperty(ref colorBackground, value);
-        }
-
       
 
 
@@ -79,7 +73,7 @@ namespace PlantLoggerApp.ViewModels
             Console.WriteLine("This is the pick photo");
 
            
-
+            /*
             try
             {
                 var photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
@@ -95,11 +89,11 @@ namespace PlantLoggerApp.ViewModels
             }
             catch (Exception ex)
             {
-
+               
             }
            
-
-            /*
+            */
+            
             
             var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
 
@@ -117,7 +111,7 @@ namespace PlantLoggerApp.ViewModels
             //   ThePlants.ImageSource = memorystreamhandler.ToArray();
             // Console.WriteLine(thePlants.ToString() + "This is the console");
             //  }
-            */
+            
         }
 
 
@@ -125,6 +119,7 @@ namespace PlantLoggerApp.ViewModels
 
         private async void takePicture()
         {
+            /*
             Plant testPlant = new Plant();
 
             try
@@ -145,7 +140,7 @@ namespace PlantLoggerApp.ViewModels
                 
             }
         
-
+            */
     
 
 
@@ -154,7 +149,7 @@ namespace PlantLoggerApp.ViewModels
 
 
 
-    /*
+    
     Plant testPlant = new Plant();
     Console.WriteLine("This is the take photo");
 
@@ -166,8 +161,8 @@ namespace PlantLoggerApp.ViewModels
     testPlant.ImageSource = ImageSource.FromStream(() => stream);
 
 
-    */
-    //ThePlants = testPlant;
+    
+    ThePlants = testPlant;
 
     // string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Images", "temp");
     // testPlant.imageSource = folderPath;
@@ -227,7 +222,13 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref drySoil, value);
         }
 
-       
+        public string DateTime
+        {
+            get => dateTime;
+            set => SetProperty(ref dateTime, value);
+        }
+
+
 
         public string Type
         {
@@ -247,18 +248,7 @@ namespace PlantLoggerApp.ViewModels
         public Command PostCommand { get; }
 
 
-        public async void postRequest()
-        {
-
-            
-
-           
-
-
-
-
-        }
-
+      
         private async void OnCancel()
         {
             // This will pop the current page off the navigation stack
@@ -274,11 +264,13 @@ namespace PlantLoggerApp.ViewModels
         {
             Plant newPlant = new Plant()
             {
-                name = Name,
+                
                 plantID = PlantID,
                 AirHumidity = AirHumidity,
+                Temperature = temperature,
                 tempWarning = TempWarning,
                 drySoil = DrySoil,
+                dateTime = DateTime,
                // Air_humidity = Air_humidity,
                // Temperature = Temperature,
                 //ImageSource = ThePlants.ImageSource,
@@ -291,28 +283,14 @@ namespace PlantLoggerApp.ViewModels
 
            
 
-            /*
-            var clientget = new HttpClient();
-            var uri = "https://httpbin.org/get";
-
-            var response2 = await clientget.GetAsync(uri2);
-
-            string content = await response2.Content.ReadAsStringAsync();
-            Console.WriteLine(content);
-            List<Plant> plantie = JsonConvert.DeserializeObject<List<Plant>>(content);
-
-            foreach (var item in plantie)
-            {
-                Plant planget = new Plant(item.PlantID, item.Temperature, item.Air_humidity, item.Soil_humidity, item.Time);
-            }
-            */
+         
             
                 await DataStore.AddItemAsync(newPlant);
             
             var json = JsonConvert.SerializeObject(newPlant);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = "http://192.168.87.171:3000/measurements";
+            var url = "http://192.168.87.171:3000/measurement";
             var client = new HttpClient();
             var response = await client.PostAsync(url, data);
 

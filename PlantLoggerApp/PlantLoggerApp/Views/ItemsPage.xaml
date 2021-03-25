@@ -12,10 +12,7 @@
         <ToolbarItem Text="Get" Command="{Binding TappedTest}"/>
         <ToolbarItem Text="Pick Image" Command="{Binding PickPicture}"></ToolbarItem>
     </ContentPage.ToolbarItems>
-    <!--
-      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
-      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
-    -->
+   
     
                         
     <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding TappedTest}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
@@ -30,14 +27,14 @@
                        
                         <Image Source="{Binding ImageSource}"></Image>
                         <Label Text="Current temperature"></Label>
-                        <Label Text="{Binding Temperature}"></Label>
+                        <Label Text="{Binding Temperature}" TextColor="{Binding ColorBackground}"></Label>
                         <Label Text="Current air humidity"></Label>
-                        <Label Text="{Binding AirHumidity}" 
+                        <Label Text="{Binding AirHumidity} "  
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
+                            FontSize="13"  />
                         
-                        <Label Text="Plant's dryness in percentage"></Label>
+                        <Label Text="Is the plant dry"></Label>
                         <Label Text="{Binding DrySoil}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"

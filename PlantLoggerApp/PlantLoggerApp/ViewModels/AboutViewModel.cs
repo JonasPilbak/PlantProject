@@ -15,9 +15,8 @@ namespace PlantLoggerApp.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {
-        INotificationManager notificationManager;
-        int notificationNumber = 0;
-       // StackLayout clocklayout;
+      
+  
         private Plant thePlants = null;
 
         public Plant ThePlants
@@ -34,12 +33,6 @@ namespace PlantLoggerApp.ViewModels
             get { return name; }
             set { name = value; }
         }
-
-       // public StackLayout Clocklayout
-      //  {
-       //     get { return clocklayout; }
-       //     set { clocklayout = value; }
-       // }
 
 
 
@@ -60,46 +53,13 @@ namespace PlantLoggerApp.ViewModels
             Plants = new ObservableCollection<Plant>();
             Title = "Main Page";
             ThePlants = new Plant();
-            MakeNotification = new Command(ShowNotification);
+          
             //AddPicture = new Command(takePicture);
             FindPhoto = new Command(pickPhoto);
-            //OnScheduleClick = new Command(OnSchedule);
-           // OnSendClick = new Command(Onsend);
-
-/*
-            notificationManager = DependencyService.Get<INotificationManager>();
-            notificationManager.NotificationReceived += (sender, eventArgs) =>
-            {
-                var evtData = (NotificationEventArgs)eventArgs;
-                ShowNotification();
-            };
-*/
+           
         }
-        /*
-        public async void Onsend()
-        {
-            notificationNumber++;
-            string title = $"Local Notification #{notificationNumber}";
-            string message = $"You have now received {notificationNumber} notifications!";
-            notificationManager.SendNotification("Title", "Message");
-        }
-
-        public async void OnSchedule()
-        {
-            notificationNumber++;
-            string title = $"Local Notification #{notificationNumber}";
-            string message = $"You have now received {notificationNumber} notifications!";
-            notificationManager.SendNotification(title, message, DateTime.Now.AddSeconds(10));
-        }
-
-
-        */
-        private async void appNotification()
-        {
-
-            // CrossLocalNotifications.Current.Show("This is a test", "Ok");
-
-        }
+       
+      
         private async void pickPhoto()
         {
 
@@ -156,48 +116,10 @@ namespace PlantLoggerApp.ViewModels
 
 
 
-        public async void ShowNotification()
-        {
-            /*
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                var msg = new Label()
-                {
-                    Text = $"Notification Received:\nTitle: This is the title\nMessage: I am the message"
-                };
-                clocklayout.Children.Add(msg);
-            });
-            */
-        }
-
+     
 
     }
-    /*
-        private async void takePicture()
-        {
-            Plant testPlant = new Plant();
-            Console.WriteLine("This is the take photo");
-
-
-            FileResult result = await MediaPicker.CapturePhotoAsync();
-
-
-
-            Stream stream = await result.OpenReadAsync();
-
-
-
-            testPlant.ImageSource = ImageSource.FromStream(() => stream);
-            ThePlants = testPlant;
-            Console.WriteLine(testPlant.ToString() + "This is the console");
-            //Plants.Add(thePlants);
-
-
-
-
-
-        }
-
-       */
+    
+    
 }
     

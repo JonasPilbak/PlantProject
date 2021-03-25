@@ -14,10 +14,8 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Spacing="3" Padding="15">
-            <Button Text="Take picture" Command="{Binding FindPhoto} " ></Button>
-            <Image Source="{Binding ImageSource}"></Image>
-            <Label Text="Name of plant"></Label>
-            <Entry Text="{Binding Name}"></Entry>
+            <Button Text="Take picture" Command="{Binding AddPicture} " ></Button>
+            <Image Source="{Binding ThePlants.ImageSource}"></Image>
             <Label Text="The plants ID" FontSize="Medium" />
             <Entry Text="{Binding PlantID, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Current humidity"></Label>

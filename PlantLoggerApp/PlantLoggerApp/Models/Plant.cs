@@ -24,17 +24,25 @@ namespace PlantLoggerApp.Models
         public Color ColorBackground
         {
             get { return colorBackground; }
-            set { colorBackground = value; OnPropertyChanged(); }
-        }
+            set
+            {
 
-        /*
-                public Warnings Humidity_warning
+
+                if (TempWarning == "yes")
                 {
-                    get { return humidity_warning; }
-                    set { humidity_warning = value; OnPropertyChanged(); }
+                    colorBackground = Color.Red;
+                }
+                else
+                {
+                    colorBackground = Color.Default;
                 }
 
-                */
+                OnPropertyChanged();
+            }
+
+        }
+
+       
         public string type;
 
         public string Type
@@ -75,13 +83,30 @@ namespace PlantLoggerApp.Models
         }
 
 
-        public ImageSource imageSource = "bubz1.jpg";
+        public ImageSource imageSource;
 
         public ImageSource ImageSource
         {
 
             get { return imageSource; }
-            set { imageSource = value; OnPropertyChanged(); }
+            set {
+
+
+                if (PlantID =="1" || PlantID =="2")
+                {
+                    imageSource = "SmallPlant.jpg";
+                }
+                else if(PlantID =="3")
+                {
+                    imageSource = "Small_plant.jpg";
+                }else 
+                {
+
+                    imageSource = "randomPlant.jpg";
+                }
+                
+                OnPropertyChanged(); }
+               
         }
 
         public string temperature;
@@ -160,7 +185,7 @@ namespace PlantLoggerApp.Models
             this.Name = name;
 
         }
-        public Plant(string plantID, string temperature, string airHumidity, string tempWarning, string drySoil, string dateTime, byte[] picture ) 
+        public Plant(string plantID, string temperature, string airHumidity, string tempWarning, string drySoil, string dateTime, ImageSource imageSource, Color colorBackground ) 
         {
             
             this.PlantID = plantID;
@@ -169,7 +194,8 @@ namespace PlantLoggerApp.Models
             this.TempWarning = tempWarning;
             this.DrySoil = drySoil;
             this.DateTime = dateTime;
-            this.Picture = picture;
+            this.ImageSource = imageSource;
+            this.ColorBackground = colorBackground;
        
         }
     }

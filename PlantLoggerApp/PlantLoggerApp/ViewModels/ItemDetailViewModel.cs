@@ -12,7 +12,7 @@ namespace PlantLoggerApp.ViewModels
        
 
         private string plantID;
-        private float temperature;
+        private string temperature;
         private string isDry;
         private DateTime time;
         private string type;
@@ -28,7 +28,7 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref imageSource, value);
         }
 
-        public float Temperature
+        public string Temperature
         {
             get => temperature;
             set => SetProperty(ref temperature, value);
@@ -50,9 +50,9 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref isDry, value);
         }
 
-        
 
 
+        public string ID { get; set; }
 
 
         public string Type
@@ -100,9 +100,11 @@ namespace PlantLoggerApp.ViewModels
                 
                 var plant = await DataStore.GetItemAsync(plantID);
                 //PlantID = plant.PlantID;
-                PlantID = plant.PlantID;
-                AirHumidity = plant.airHumidity;
+                ID = plant.PlantID;
+                Temperature = plant.Temperature;
+                AirHumidity = plant.AirHumidity;
                 TempWarning = plant.TempWarning;
+
                 
             }
             catch (Exception)

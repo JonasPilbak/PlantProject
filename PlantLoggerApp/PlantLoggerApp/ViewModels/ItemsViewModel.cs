@@ -31,7 +31,7 @@ namespace PlantLoggerApp.ViewModels
 
         public Command TappedTest { get; }
         public Command AddPicture { get; }
-        public ObservableCollection<Plant> Plants { get; }
+        public ObservableCollection<Plant> Plants { get; set; }
         public Command LoadItemsCommand { get; }
         public Command PickPicture { get; }
         public Command AddItemCommand { get; }
@@ -40,12 +40,13 @@ namespace PlantLoggerApp.ViewModels
         public ItemsViewModel()
         {
             
+            
             Title = "Show plants";
             Plants = new ObservableCollection<Plant>();
             
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             PickPicture = new Command(findaPicture);
-
+            
             ItemTapped = new Command<Plant>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
@@ -132,7 +133,7 @@ namespace PlantLoggerApp.ViewModels
                     foreach (var item in plantie)
             {
                         
-                Plant planget = new Plant( item.plantID, item.temperature, item.airHumidity,item.tempWarning, item.drySoil, item.dateTime, item.picture);
+                Plant planget = new Plant( item.plantID, item.temperature, item.airHumidity,item.tempWarning, item.drySoil, item.dateTime, item.imageSource, item.colorBackground);
                        
 
                 Plants.Add(planget);
