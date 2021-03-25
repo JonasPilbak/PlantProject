@@ -210,6 +210,8 @@ namespace PlantLoggerApp.ViewModels
             set => SetProperty(ref plantID, value);
         }
 
+
+
         public string Temperature
         {
             get => temperature;
@@ -266,11 +268,12 @@ namespace PlantLoggerApp.ViewModels
             {
                 
                 plantID = PlantID,
-                AirHumidity = AirHumidity,
                 Temperature = temperature,
+                AirHumidity = AirHumidity,
                 tempWarning = TempWarning,
                 drySoil = DrySoil,
                 dateTime = DateTime,
+               
                // Air_humidity = Air_humidity,
                // Temperature = Temperature,
                 //ImageSource = ThePlants.ImageSource,
@@ -290,7 +293,7 @@ namespace PlantLoggerApp.ViewModels
             var json = JsonConvert.SerializeObject(newPlant);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = "http://192.168.87.171:3000/measurement";
+            var url = "http://192.168.87.171:3000/plants";
             var client = new HttpClient();
             var response = await client.PostAsync(url, data);
 

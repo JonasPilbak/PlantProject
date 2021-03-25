@@ -140,15 +140,7 @@ namespace PlantLoggerApp.Models
             get { return time; }
             set { time = value; OnPropertyChanged(); }
         }
-        /*
-                public string air_humidity;
-
-                public string Air_humidity
-                {
-                    get { return air_humidity; }
-                    set { air_humidity = value; OnPropertyChanged(); }
-                }
-        */
+      
         public string measureId;
 
         public string MeasureId
@@ -185,6 +177,9 @@ namespace PlantLoggerApp.Models
             this.Name = name;
 
         }
+
+
+        
         public Plant(string plantID, string temperature, string airHumidity, string tempWarning, string drySoil, string dateTime, ImageSource imageSource, Color colorBackground ) 
         {
             
@@ -198,5 +193,6 @@ namespace PlantLoggerApp.Models
             this.ColorBackground = colorBackground;
        
         }
+        
     }
 }

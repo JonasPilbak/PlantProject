@@ -12,7 +12,7 @@ namespace PlantLoggerApp.Services
     public class MockDataStore : IDataStore<Plant>
     {
        
-        readonly List<Plant> plants;
+        public List<Plant> plants;
 
         public MockDataStore()
         {
@@ -20,6 +20,7 @@ namespace PlantLoggerApp.Services
 
 
             plants = new List<Plant>()
+            
             {
 
                // new Plant { PlantID = "1", Type = "First item", Temperature_warning=false , Temperature = 5, Air_humidity = 1, IsDry = false }
@@ -33,29 +34,14 @@ namespace PlantLoggerApp.Services
                 
 
             };
-
+          
 
 
 
         }
 
-        public async void postRequest() 
-        {
+      
         
-            var json = JsonConvert.SerializeObject(plants);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var url = "https://httpbin.org/post";
-            var client = new HttpClient();
-            var response = await client.PostAsync(url, data);
-
-            string result = response.Content.ReadAsStringAsync().Result;
-            Console.WriteLine(result);
-
-            
-
-        
-        }
 
 
 

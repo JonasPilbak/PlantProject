@@ -24,12 +24,13 @@ namespace PlantLoggerApp.ViewModels
 
         public ImageSource imageResult { get; set; }
 
-
+        public List<Plant> plantslist;
 
 
 
 
         public Command TappedTest { get; }
+        public Command fetchNewList { get; }
         public Command AddPicture { get; }
         public ObservableCollection<Plant> Plants { get; set; }
         public Command LoadItemsCommand { get; }
@@ -39,18 +40,23 @@ namespace PlantLoggerApp.ViewModels
 
         public ItemsViewModel()
         {
+
+            plantslist = new List<Plant>() {
             
+            
+            };
             
             Title = "Show plants";
-            Plants = new ObservableCollection<Plant>();
-            
+            Plants = new ObservableCollection<Plant>() { };
+            fetchNewList = new Command(GetPlants);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             PickPicture = new Command(findaPicture);
             
             ItemTapped = new Command<Plant>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-            TappedTest = new Command(testGet);
+            TappedTest = new Command(GetMethod);
+
             
             
         }
@@ -111,11 +117,57 @@ namespace PlantLoggerApp.ViewModels
         }
 
 
-        public async void testGet() 
+        public async void GetPlants()
         {
             Plants.Clear();
 
-           // var plants = await DataStore.GetItemsAsync(true);
+            // var plants = await DataStore.GetItemsAsync(true);
+            var clientget = new HttpClient();
+            var uri2 = "http://192.168.87.171:3000/plants";
+            try
+            {
+
+                var response2 = await clientget.GetAsync(uri2);
+
+                if (response2.IsSuccessStatusCode)
+                {
+
+                    string content = await response2.Content.ReadAsStringAsync();
+                    Console.WriteLine(content);
+                    List<Plant> plantie = JsonConvert.DeserializeObject<List<Plant>>(content);
+
+                    foreach (var item in plantie)
+                    {
+
+                        Plant planget = new Plant { PlantID = item.plantID, Temperature = item.temperature, AirHumidity = item.airHumidity, TempWarning = item.tempWarning, DrySoil = item.drySoil, DateTime = item.dateTime};
+
+
+                        Plants.Add(planget);
+
+
+
+                    }
+
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                Debug.WriteLine("Error");
+            }
+
+        }
+
+
+
+
+        public async void GetMethod() 
+        {
+            Plants.Clear();
+
+            //var plants = await DataStore.GetItemsAsync(true);
             var clientget = new HttpClient();
             var uri2 = "http://192.168.87.171:3000/measurements";
             try
@@ -133,7 +185,7 @@ namespace PlantLoggerApp.ViewModels
                     foreach (var item in plantie)
             {
                         
-                Plant planget = new Plant( item.plantID, item.temperature, item.airHumidity,item.tempWarning, item.drySoil, item.dateTime, item.imageSource, item.colorBackground);
+                Plant planget = new Plant { PlantID = item.plantID, Temperature = item.temperature, AirHumidity = item.airHumidity, TempWarning = item.tempWarning, DrySoil = item.drySoil, DateTime = item.dateTime, ImageSource =  item.imageSource, ColorBackground =  item.colorBackground };
                        
 
                 Plants.Add(planget);

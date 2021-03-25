@@ -9,7 +9,7 @@ namespace PlantLoggerApp.ViewModels
     [QueryProperty(nameof(PlantID), nameof(PlantID))]
     public class ItemDetailViewModel : BaseViewModel
     {
-       
+
 
         private string plantID;
         private string temperature;
@@ -26,6 +26,12 @@ namespace PlantLoggerApp.ViewModels
         {
             get => imageSource;
             set => SetProperty(ref imageSource, value);
+        }
+
+        public ItemDetailViewModel()
+        {
+        
+       
         }
 
         public string Temperature

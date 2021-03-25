@@ -10,11 +10,12 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
         <ToolbarItem Text="Get" Command="{Binding TappedTest}"/>
+        <ToolbarItem Text="Get Other list" Command="{Binding fetchNewList}"/>
         <ToolbarItem Text="Pick Image" Command="{Binding PickPicture}"></ToolbarItem>
     </ContentPage.ToolbarItems>
+
    
-    
-                        
+
     <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding TappedTest}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Plants}"

@@ -8,7 +8,7 @@
     
     <StackLayout Spacing="20" Padding="15">
         <Label Text="PlantID:" FontSize="Medium" />
-        <Label Text="{Binding PlantID}" FontSize="Small"/>
+        <Label Text="{Binding ID}" FontSize="Small"/>
         <Label Text="Current humidity"></Label>
         <Label Text="{Binding AirHumidity}"></Label>
         <Label Text="{Binding Temperature}"></Label>
